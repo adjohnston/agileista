@@ -22,6 +22,7 @@ tmp/
 .sass-cache
 public/assets
 .ruby-version
+vendor/components
 
 .env
 

@@ -1,0 +1,15 @@
+{
+  "name": "agileista",
+  "version": "0.0.1",
+  "authors": [
+    "Adam Johnston <adam.johnston3679@gmail.com>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "vendor/components"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "~3.3.5"
+  }
+}
