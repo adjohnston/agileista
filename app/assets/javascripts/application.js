@@ -15,10 +15,6 @@
 //= require jquery.ui.sortable
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
-//= require foundation/foundation
-//= require foundation/foundation.topbar
-//= require foundation/foundation.reveal
-//= require foundation/foundation.orbit
 //= require d3.v3/d3.v3
 //= require jquery.autosize
 //= require jquery.timeago
@@ -31,5 +27,3 @@ $(document).ready(function(){
   $('textarea.autosize').autosize({});
   $("abbr.timeago").timeago();
 });
-
-$(document).foundation();
