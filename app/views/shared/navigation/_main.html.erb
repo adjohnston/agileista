@@ -1,153 +1,201 @@
-<nav class="top-bar hide-on-print" data-topbar>
+<header class="navbar navbar" role="banner">
+
   <% if person_signed_in_and_project? %>
 
-  <ul class="title-area">
-    <!-- Title Area -->
-    <li class="name">
-      <h1><%= link_to "Agileista", (project ? project_backlog_index_path(project) : projects_path) %></h1>
-    </li>
-    <li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
-  </ul>
+    <!-- <h1 class="navbar-header navbar__header"><%= link_to 'Agileista.', (project ? project_backlog_index_path(project) : projects_path), {class: 'navbar-brand'} %></h1>
 
-  <section class="top-bar-section">
-    <!-- Left Nav Section -->
-    <ul class="left">
-      <li class="divider"></li>
-      <li class="has-dropdown">
-        <%= link_to "Backlog", project_backlog_index_path(project) %>
-        <ul class="dropdown">
-          <li><%= link_to "Add user story", new_project_user_story_path(project) %></li>
-          <li><%= link_to "View all stories", project_backlog_index_path(project) %></li>
-          <li><%= link_to "Export CSV", project_backlog_index_path(project, format: 'csv') %></li>
-        </ul>
-      </li>
-      <li class="divider hide-for-small"></li>
-      <li class="has-dropdown hide-for-small">
-        <%= link_to "Sprints", project_sprints_path(project) %>
-        <ul class="dropdown">
-          <li><%= link_to("Add sprint", new_project_sprint_path(project)) %></li>
-          <li><%= link_to "View all sprints", project_sprints_path(project) %></li>
-        </ul>
-      </li>
-      <li class="divider"></li>
-      <% if current_sprint %>
-        <li>
-          <%= link_to "Task Board", project_sprint_path(project, current_sprint) %>
+    <nav role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+
+      </ul>
+    </nav>
+
+    <section class="top-bar-section">
+      <ul class="left">
+        <li class="divider"></li>
+        <li class="has-dropdown">
+          <%= link_to "Backlog", project_backlog_index_path(project) %>
+          <ul class="dropdown">
+            <li><%= link_to "Add user story", new_project_user_story_path(project) %></li>
+            <li><%= link_to "View all stories", project_backlog_index_path(project) %></li>
+            <li><%= link_to "Export CSV", project_backlog_index_path(project, format: 'csv') %></li>
+          </ul>
         </li>
-      <% end %>
-    </ul>
+        <li class="divider hide-for-small"></li>
+        <li class="has-dropdown hide-for-small">
+          <%= link_to "Sprints", project_sprints_path(project) %>
+          <ul class="dropdown">
+            <li><%= link_to("Add sprint", new_project_sprint_path(project)) %></li>
+            <li><%= link_to "View all sprints", project_sprints_path(project) %></li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <% if current_sprint %>
+          <li>
+            <%= link_to "Task Board", project_sprint_path(project, current_sprint) %>
+          </li>
+        <% end %>
+      </ul>
 
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="has-form hide-for-medium hide-for-small">
-        <div class="row collapse">
-          <%= form_for :tag, url: project_search_path(project), html: {method: "get", id: "search_form"} do |t| %>
-            <div class="large-14 small-18 columns">
-              <%= text_field_tag 'q', params[:q] %>
-            </div>
-            <div class="large-10 small-6 columns">
-              <%= button_tag 'Search', class: "expand secondary button", name: nil %>
-            </div>
-          <% end %>
+      <ul class="right">
+        <li class="has-form hide-for-medium hide-for-small">
+          <div class="row collapse">
+            <%= form_for :tag, url: project_search_path(project), html: {method: "get", id: "search_form"} do |t| %>
+              <div class="large-14 small-18 columns">
+                <%= text_field_tag 'q', params[:q] %>
+              </div>
+              <div class="large-10 small-6 columns">
+                <%= button_tag 'Search', class: "expand secondary button", name: nil %>
+              </div>
+            <% end %>
+          </div>
+        </li>
+        <li class="hide-for-small"><a href="#" data-reveal-id="js-search-modal">?</a></li>
+        <li class="divider hide-for-small"></li>
+        <li class="has-dropdown">
+          <%= link_to project.name, project_backlog_index_path(project) %>
+          <ul class="dropdown">
+            <li><label><%= project.name %></label></li>
+            <li><%= link_to "Settings", edit_project_path(project) if current_person.scrum_master_for?(project) %></li>
+            <li><%= link_to "Users", project_people_path(project) %></li>
+            <li class="divider"></li>
+            <li><label>My projects</label></li>
+            <% current_person.projects.where("project_id != ?", project.id).each do |project| %>
+              <li><%= link_to project.name, project_backlog_index_path(project) unless project.new_record? %></li>
+            <% end %>
+            <li class="divider"></li>
+            <li><%= link_to 'Add project', new_project_path %></li>
+            <li><%= link_to 'View all projects', projects_path %></li>
+          </ul>
+        </li>
+        <li class="divider hide-for-small"></li>
+        <li class="has-dropdown hide-for-small">
+          <%= link_to(current_user.name, edit_person_registration_path) %>
+          <ul class="dropdown">
+            <li><label>Account</label></li>
+            <li><%= link_to "Edit profile", edit_person_registration_path %></li>
+            <li class="divider"></li>
+            <li><%= link_to('Logout', destroy_person_session_path, method: :delete) %></li>
+          </ul>
+        </li>
+      </ul>
+    </section> -->
+
+    <div class="container clearfix">
+      <h1 class="navbar-header navbar__header"><%= link_to 'Agileista.', project ? project_backlog_index_path(project) : projects_path, {class: 'navbar-brand'} %></h1>
+
+      <nav id="user-dropdown" class="navbar-right dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
+        
+        <ul class="dropdown-menu dropdown__menu--right">
+          <li><%= link_to 'Edit profile', edit_person_registration_path %></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#" data-toggle="modal" data-target="#js-search-modal">Help</a></li>
+          <li><%= link_to 'Logout', destroy_person_session_path, {class: 'warning', method: :delete} %></li>
+        </ul>
+      </nav>
+    </div>
+
+    <nav id="projects-bar" class="clearfix">
+      <div class="container">
+        <% if current_sprint %>
+          <%= link_to project.name, project_sprint_path(project, current_sprint) %>
+        <% end %>
+
+        <div class="navbar-nav dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <%= current_sprint ? 'Projects' : project.name %> <span class="caret"></span></a>
+          
+          <ul class="dropdown-menu dropdown__menu">
+            <% current_person.projects.each do |project| %>
+              <li><%= link_to project.name, project_backlog_index_path(project) unless project.new_record? %></li>
+              <li role="separator" class="divider"></li>
+            <% end %>
+
+            <li><%= link_to 'Add project', new_project_path %></li>
+            <li><%= link_to 'View all projects', projects_path %></li>
+          </ul>
         </div>
-      </li>
-      <li class="hide-for-small"><a href="#" data-reveal-id="js-search-modal">?</a></li>
-      <li class="divider hide-for-small"></li>
-      <li class="has-dropdown">
-        <%= link_to project.name, project_backlog_index_path(project) %>
-        <ul class="dropdown">
-          <li><label><%= project.name %></label></li>
-          <li><%= link_to "Settings", edit_project_path(project) if current_person.scrum_master_for?(project) %></li>
-          <li><%= link_to "Users", project_people_path(project) %></li>
-          <li class="divider"></li>
-          <li><label>My projects</label></li>
-          <% current_person.projects.where("project_id != ?", project.id).each do |project| %>
-            <li><%= link_to project.name, project_backlog_index_path(project) unless project.new_record? %></li>
+
+        <div class="navbar-nav dropdown">
+          <%= link_to project_backlog_index_path(project), {class: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': true, 'aria-expanded': false} do %>
+            Backlog <span class="caret"></span>
           <% end %>
-          <li class="divider"></li>
-          <li><%= link_to 'Add project', new_project_path %></li>
-          <li><%= link_to 'View all projects', projects_path %></li>
-        </ul>
-      </li>
-      <li class="divider hide-for-small"></li>
-      <li class="has-dropdown hide-for-small">
-        <%= link_to(current_user.name, edit_person_registration_path) %>
-        <ul class="dropdown">
-          <li><label>Account</label></li>
-          <li><%= link_to "Edit profile", edit_person_registration_path %></li>
-          <li class="divider"></li>
-          <li><%= link_to('Logout', destroy_person_session_path, method: :delete) %></li>
-        </ul>
-      </li>
-    </ul>
-  </section>
+          
+          <ul class="dropdown-menu dropdown__menu">
+            <li><%= link_to "Add user story", new_project_user_story_path(project) %></li>
+            <li><%= link_to "View all stories", project_backlog_index_path(project) %></li>
+            <li role="separator" class="divider"></li>
+            <li><%= link_to "Export CSV", project_backlog_index_path(project, format: 'csv') %></li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav dropdown">
+          <%= link_to project_sprints_path(project), {class: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': true, 'aria-expanded': false} do %>
+            Sprints <span class="caret"></span>
+          <% end %>
+          
+          <ul class="dropdown-menu dropdown__menu">
+            <li><%= link_to("Add sprint", new_project_sprint_path(project)) %></li>
+            <li><%= link_to "View all sprints", project_sprints_path(project) %></li>
+          </ul>
+        </div>
+
+        <%= form_for :tag, url: project_search_path(project), html: {method: 'get', id: 'search_form', class: 'navbar-form navbar-right'} do |t| %>
+          <%= text_field_tag 'q', params[:q], {placeholder: 'Search'} %>
+          <%= button_tag class: 'btn btn-primary ag-btn', name: nil do %>
+            <span class="sr-only">Search</span><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+          <% end %>
+        <% end %>
+      </div>
+    </nav>
 
   <% elsif person_signed_in? %>
 
-  <ul class="title-area">
-    <!-- Title Area -->
-    <li class="name">
-      <h1>
-        <%= link_to "Agileista", projects_path %>
-      </h1>
-    </li>
-    <li class="toggle-topbar"><a href="#"></a></li>
-  </ul>
+    <div class="container clearfix">
+      <h1 class="navbar-header navbar__header"><%= link_to 'Agileista.', projects_path, {class: 'navbar-brand'} %></h1>
 
-  <section class="top-bar-section">
-    <!-- Left Nav Section -->
-    <ul class="left">
-    </ul>
+      <nav id="user-dropdown" class="navbar-right dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.name %> <span class="caret"></span></a>
+        
+        <ul class="dropdown-menu dropdown__menu--right">
+          <li><%= link_to 'Edit profile', edit_person_registration_path %></li>
+          <li role="separator" class="divider"></li>
+          <li><%= link_to 'Logout', destroy_person_session_path, {class: 'warning', method: :delete} %></li>
+        </ul>
+      </nav>
+    </div>
 
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="divider"></li>
-      <li class="has-dropdown">
-        <%= link_to "Projects", projects_path %>
-        <ul class="dropdown">
+    <nav id="projects-bar" class="container clearfix">
+      <div class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects <span class="caret"></span></a>
+        
+        <ul class="dropdown-menu dropdown__menu">
           <% current_person.projects.each do |project| %>
             <li><%= link_to project.name, project_backlog_index_path(project) unless project.new_record? %></li>
+            <li role="separator" class="divider"></li>
           <% end %>
-          <li class="divider"></li>
+
           <li><%= link_to 'Add project', new_project_path %></li>
           <li><%= link_to 'View all projects', projects_path %></li>
         </ul>
-      </li>
-      <li class="divider"></li>
-      <li class="has-dropdown">
-        <%= link_to(current_user.name, edit_person_registration_path) %>
-        <ul class="dropdown">
-          <li><label>Account</label></li>
-          <li><%= link_to "Edit profile", edit_person_registration_path %></li>
-          <li class="divider"></li>
-          <li><%= link_to('Logout', destroy_person_session_path, method: :delete) %></li>
-        </ul>
-      </li>
-    </ul>
-  </section>
+      </div>
+    </nav>
 
   <% else %>
 
-  <ul class="title-area">
-    <!-- Title Area -->
-    <li class="name">
-      <h1>
-        <%= link_to "Agileista", root_path %>
-      </h1>
-    </li>
-    <li class="toggle-topbar"><a href="#"></a></li>
-  </ul>
+    <div class="container">
+      <h1 class="navbar-header navbar__header"><%= link_to 'Agileista.', root_path, {class: 'navbar-brand'} %></h1>
 
-  <section class="top-bar-section">
-    <ul class="right">
-      <li><%= link_to "About", root_path %></li>
-      <li class="divider"></li>
-      <li><%= link_to "Login", new_person_session_path %></li>
-      <li class="divider"></li>
-      <li><%= link_to "Sign up", new_person_registration_path %></li>
-    </ul>
-  </section>
+      <nav role="navigation">
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to 'About', root_path %></li>
+          <li><%= link_to 'Login', new_person_session_path %></li>
+          <li><%= link_to 'Sign up', new_person_registration_path %></li>
+        </ul>
+      </nav>
+    </div>
 
   <% end %>
 
-</nav>
+</header>

@@ -1,0 +1,28 @@
+//  ------------------
+//  dropdown : modules
+//  ------------------
+
+//  mixin
+//  -----
+    @mixin dropdown-menu($dir: left) {
+      margin-top:     0;
+      padding-top:    0;
+      padding-bottom: 0;
+
+      border-width: 0;
+      box-shadow: none;
+
+      text-align: $dir;
+
+      > li > a { padding: gap(0.5) gap() }
+    }
+
+    .dropdown {
+      margin-left:  gap(-1);
+      padding-left: gap(1);
+
+      a { text-decoration: none }
+    }
+
+      .dropdown__menu        { @include dropdown-menu }
+      .dropdown__menu--right { @include dropdown-menu(right) }

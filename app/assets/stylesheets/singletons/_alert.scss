@@ -1,0 +1,14 @@
+//  ------------------
+//  alert : singletons
+//  ------------------
+
+    .alert {
+      margin-bottom: 0;
+
+      & .close { 
+        @include font-size(1.5, 1);
+
+        display: inline-block;
+        vertical-align: top;
+      }
+    }

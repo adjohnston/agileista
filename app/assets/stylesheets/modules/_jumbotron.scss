@@ -1,0 +1,19 @@
+//  -------------------
+//  jumbotron : modules
+//  -------------------
+    
+    .jumbotron {
+      margin-top:     gap(-1);
+      padding-top:    gap(3.5);
+      padding-bottom: gap(1.5);
+    }
+
+      .jumbotron__title {
+        @include font-size(4);
+
+        margin-bottom: gap(0.5);
+      }
+
+      .jumbotron__link {
+        @include font-size(1.5);
+      }

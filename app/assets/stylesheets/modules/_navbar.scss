@@ -1,0 +1,25 @@
+//  ----------------
+//  navbar : modules
+//  ----------------
+
+    .navbar {
+      margin-bottom: 0;
+
+      background-color: $ag-navbar-bg;
+      border-bottom-width: 0;
+
+      .warning { 
+        @include transition(color $fast, background-color $fast);
+
+        color: $ag-navbar-link-warning-text;
+
+        &:hover {
+          background-color: $ag-navbar-link-warning-hover-bg;
+          color: $ag-navbar-link-warning-hover-text;
+        }
+      }
+    }
+
+      .navbar__header {
+        margin: 0;
+      }

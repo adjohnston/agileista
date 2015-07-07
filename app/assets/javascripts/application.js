@@ -15,6 +15,7 @@
 //= require jquery.ui.sortable
 //= require jquery.ui.draggable
 //= require jquery.ui.droppable
+//= require bootstrap-sass/assets/javascripts/bootstrap.min
 //= require d3.v3/d3.v3
 //= require jquery.autosize
 //= require jquery.timeago
@@ -22,8 +23,10 @@
 //= require agileista_graphs
 //= require task_board
 //= require main
+//= require sticky
 
 $(document).ready(function(){
   $('textarea.autosize').autosize({});
-  $("abbr.timeago").timeago();
+  $('abbr.timeago').timeago();
+  $('#projects-bar').sticky();
 });

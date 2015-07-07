@@ -41,8 +41,14 @@
   </div>
 
 <% else %>
-  <h2>Backlog:</h2>
-  <h3><%= link_to 'Create your first user story', new_project_user_story_path(@project) %></h3>
+  
+  <header class="jumbotron">
+    <div class="container">
+      <h1 class="jumbotron__title">Backlog</h1>
+      <%= link_to 'Create your first user story', new_project_user_story_path(@project), {class: 'jumbotron__link'} %>
+    </div>
+  </header>
+
 <% end %>
 
 <% content_for :custom_js do %>

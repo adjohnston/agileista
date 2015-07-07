@@ -1,0 +1,10 @@
+//  --------------------
+//  divider : singletons
+//  --------------------
+
+    [class*="dropdown__menu"] .divider {
+      height: 0;
+      margin: -1px 0;
+
+      border: 1px solid $dropdown-divider-bg;
+    }

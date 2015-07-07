@@ -1,74 +1,73 @@
 <%= simple_form_for [@project, @user_story] do |f| %>
-  <div class="row">
-
-    <div class="large-15 small-24 medium-24 columns">
-      <%= f.input :definition, input_html: {rows: 5, placeholder: 'As a user I want blink tags around key navigation items so I can find them quicker...'} %>
-      <div class="row">
-        <div class="large-10 small-10 medium-10 columns">
-          <%= f.input :story_points, input_html: { placeholder: '0, 1, 3, 5, 8, 13, 20 ...' } %>
-        </div>
-        <div class="large-10 small-10 medium-10 columns">
-          <%= f.input :stakeholder, input_html: { value: show_stakeholder(@user_story, current_user) } %>
-        </div>
-        <div class="large-4 small-4 medium-4 columns">
-          <%= f.label :cannot_be_estimated %>
-          <%= f.input :cannot_be_estimated, as: :boolean, label: false %>
-        </div>
+  <div class="col-md-8">
+    <%= f.input :definition, input_html: {rows: 5, placeholder: 'As a user I want blink tags around key navigation items so I can find them quicker...'} %>
+    <div class="row">
+      <div class="large-10 small-10 medium-10 columns">
+        <%= f.input :story_points, input_html: { placeholder: '0, 1, 3, 5, 8, 13, 20 ...' } %>
       </div>
-      <div class="row">
-        <div class="large-24 small-24 medium-24 columns">
-          <%= f.input :description, label: "Notes", input_html: {class: 'autosize'} %>
-        </div>
+      <div class="large-10 small-10 medium-10 columns">
+        <%= f.input :stakeholder, input_html: { value: show_stakeholder(@user_story, current_user) } %>
       </div>
-      <div class="row">
-        <div class="large-20 small-20 medium-20 columns">
-          <%= f.button :submit, 'Save and Close', class: 'large' %>
-          <%= f.button :submit, 'Save', class: 'large' %>
-        </div>
-        <div class="large-4 small-4 medium-4 columns">
-          <%= link_to 'Delete user story', project_user_story_path(@project, @user_story), class: "right small button alert", method: :delete, data: {confirm: "Are you sure?"} unless @user_story.new_record? %>
-        </div>
+      <div class="large-4 small-4 medium-4 columns">
+        <%= f.label :cannot_be_estimated %>
+        <%= f.input :cannot_be_estimated, as: :boolean, label: false %>
       </div>
     </div>
-
-    <div class="large-8 small-8 medium-8 hide-for-small hide-for-medium columns">
-      <h3>Acceptance Criteria</h3>
-      <ol id="acceptance-criteria">
-        <%= f.simple_fields_for :acceptance_criteria do |ac| %>
-          <li>
-            <div class="alert-box secondary">
-              <%= ac.input :detail, as: :text, input_html: {rows: 1, class: 'vert autosize'} %>
-              <% unless ac.object.new_record? %>
-                <span class="remove">
-                  <%= ac.input '_destroy', label: "Remove", as: :boolean %>
-                </span>
-              <% end %>
-            </div>
-          </li>
-        <% end %>
-      </ol>
-      <p><%= link_to 'Add another', '#acceptance_criterium', class: "add_nested_criterium", rel: "acceptance_criteria" %></p>
-
-      <hr>
-
-      <h3>Tasks</h3>
-      <ol id="tasks">
-        <%= f.simple_fields_for :tasks do |tf| %>
-          <li>
-            <div class="alert-box secondary">
-              <%= tf.input :definition, as: :text, input_html: {rows: 1, class: 'vert autosize'} %>
-              <%= tf.input :description, input_html: {rows: 5, class: 'vert'} %>
-              <% unless tf.object.new_record? %>
-                <span class="remove">
-                  <%= tf.input '_destroy', label: "Remove", as: :boolean %>
-                </span>
-              <% end %>
-            </div>
-          </li>
-        <% end %>
-      </ol>
-      <p><%= link_to 'Add another', '#tasks', class: "add_nested_task", rel: "tasks" %></p>
+    <div class="row">
+      <div class="large-24 small-24 medium-24 columns">
+        <%= f.input :description, label: "Notes", input_html: {class: 'autosize'} %>
+      </div>
     </div>
+    <div class="row">
+      <div class="large-20 small-20 medium-20 columns">
+        <%= f.button :submit, 'Save and Close', class: 'large' %>
+        <%= f.button :submit, 'Save', class: 'large' %>
+      </div>
+      <div class="large-4 small-4 medium-4 columns">
+        <%= link_to 'Delete user story', project_user_story_path(@project, @user_story), class: "right small button alert", method: :delete, data: {confirm: "Are you sure?"} unless @user_story.new_record? %>
+      </div>
+    </div>
+  </div>
 
+  <div class="col-md-4">
+    <h3>Acceptance Criteria</h3>
+    <ol id="acceptance-criteria">
+      <%= f.simple_fields_for :acceptance_criteria do |ac| %>
+        <li>
+          <div class="alert-box secondary">
+            <%= ac.input :detail, as: :text, input_html: {rows: 1, class: 'vert autosize'} %>
+            <% unless ac.object.new_record? %>
+              <span class="remove">
+                <%= ac.input '_destroy', label: "Remove", as: :boolean %>
+              </span>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ol>
+    <p><%= link_to 'Add another', '#acceptance_criterium', class: "add_nested_criterium", rel: "acceptance_criteria" %></p>
+
+    <hr>
+
+    <h3>Tasks</h3>
+    <ol id="tasks">
+      <%= f.simple_fields_for :tasks do |tf| %>
+        <li>
+          <div class="alert-box secondary">
+            <%= tf.input :definition, as: :text, input_html: {rows: 1, class: 'vert autosize'} %>
+            <%= tf.input :description, input_html: {rows: 5, class: 'vert'} %>
+            <% unless tf.object.new_record? %>
+              <span class="remove">
+                <%= tf.input '_destroy', label: "Remove", as: :boolean %>
+              </span>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ol>
+    
+    <div>
+      <%= link_to 'Add another', '#tasks', class: "add_nested_task", rel: "tasks" %>
+    </div>
   </div>
 <% end %>

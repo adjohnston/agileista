@@ -1,0 +1,23 @@
+//  ----------------
+//  projects : theme
+//  ----------------
+
+    #projects-bar {
+      background-color: $projects-bar-bg;
+
+      .dropdown { 
+        margin-right:   gap();
+        padding-top:    gap(0.5);
+        padding-bottom: gap(0.5);
+      }
+    }
+
+    #projects-name {
+      @include font-size(1.5);
+
+      margin-top:    gap(-0.25);
+      margin-bottom: gap(-0.25);
+
+      display: inline-block;
+      vertical-align: top;
+    }

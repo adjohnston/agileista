@@ -1,0 +1,36 @@
+//  -------------------------------
+//  colours : variables : utilities
+//  -------------------------------
+
+//  base
+//  ----
+    $white: #ffffff !default;
+    $black: #000000 !default;
+    $blue:  #465975 !default;
+    $red:   #da3838 !default;
+
+    $super-light-grey: #f9f9f9 !default;
+
+
+//  body
+//  ----
+    $body-bg: lighten($blue, 60) !default;
+
+
+//  navbar
+//  ------
+    $ag-navbar-bg:                      $white !default;
+    $ag-navbar-link-warning-text:       $red !default;
+    $ag-navbar-link-warning-hover-text: mix($red, $white, 25%) !default;
+    $ag-navbar-link-warning-hover-bg:   $red !default;
+
+
+//  projects
+//  --------
+    $projects-bar-bg: $white !default;
+
+
+//  divider
+//  -------
+    $divider-bg: lighten($blue, 60) !default;
+    

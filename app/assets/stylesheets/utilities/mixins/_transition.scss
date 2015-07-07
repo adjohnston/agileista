@@ -1,0 +1,9 @@
+//  -------------------------------
+//  transition : mixins : utilities
+//  -------------------------------
+
+    @mixin transition($str) {
+      -webkit-transition: $str;
+         -moz-transition: $str;
+              transition: $str;
+    }

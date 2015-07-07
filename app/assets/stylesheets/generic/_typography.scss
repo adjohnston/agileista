@@ -1,0 +1,23 @@
+//  --------------------
+//  typography : generic
+//  --------------------
+
+//  headers
+//  -------
+    @for $n from 1 through 6 {
+      h#{$n} { margin: 0 0 gap(); }
+    }
+
+
+//  paragraph
+//  ---------
+    p { margin: 0 0 gap(); }
+
+
+//  link
+//  ----
+    a { 
+      color: currentcolor;
+
+      &:hover { color: currentcolor }
+    }

@@ -1,0 +1,24 @@
+//  ----------------
+//  layout : generic
+//  ----------------
+
+    :focus { outline: none }
+
+
+    html { line-height: gap() }
+
+
+    body {
+      min-height: 100vh;
+
+      background-color: $body-bg;
+
+      overflow-y: scroll;
+      overflow-x: hidden;
+
+      // &.header-lrg { padding-top: gap(4) }
+      // &.header-sm  { padding-top: gap(2) }
+    }
+
+
+    main[role="main"] { padding-top: gap() }

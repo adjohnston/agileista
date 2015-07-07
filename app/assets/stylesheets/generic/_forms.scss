@@ -1,0 +1,13 @@
+//  ---------------
+//  forms : generic
+//  ---------------
+
+    input {
+      min-width: gap(5, -2px);
+      height: gap(1.5, -2px);
+      padding-left:  gap(0.25);
+      padding-right: gap(0.25);
+
+      display: inline-block;
+      vertical-align: top;
+    }
